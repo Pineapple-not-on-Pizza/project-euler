@@ -1,16 +1,50 @@
 import math
+import time
 
-number = 23
+foundPrimes = []
+foundNumbers = []
 
-primes = [2, 3, 5]
+finalNumber = 0
 
-def primeChecker(n):
-    for i in range(2, math.ceil(math.sqrt(n))):
-        if number % i == 0:
-            return False
-    return True
+def isPrime(n):
+    if n == 0 or n == 1:
+        return False
+    elif n == 2:
+        return True
+    else:
+        try:
+            for i in range(2, math.ceil(math.sqrt(n)) + 1):
+                if n % i == 0:
+                    return False
+            return True
+        except:
+            print("Invalid input:", n)
 
-if primeChecker(number):
-    
+for i in range(1, 799999, 2):
+    if isPrime(i):
+        foundPrimes.append(i)
 
-    number += 2
+for i in foundPrimes:
+    tempNumber = str(i)
+
+    while len(tempNumber) >= 2:
+        tempNumber = tempNumber[:-1]
+        if not isPrime(int(tempNumber)):
+            break
+    else:
+        tempNumber = str(i)
+
+        while len(tempNumber) >= 2:
+            tempNumber = tempNumber[1:]
+            if not isPrime(int(tempNumber)):
+                break
+        else:
+            foundNumbers.append(i)
+
+print(foundNumbers)
+
+for i in foundNumbers:
+    if len(str(i)) >=2:
+        finalNumber += i
+
+print(finalNumber)
